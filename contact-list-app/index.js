@@ -5,6 +5,7 @@ const app=express();
 
 
 app.get('/',function(req,res){
+    console.log(req);
     res.send('<h1>yup server is running</h1>');
 });
 
