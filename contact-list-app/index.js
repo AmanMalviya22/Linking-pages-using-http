@@ -4,7 +4,9 @@ const port=8000;
 const app=express();
 
 
-
+app.get('/',function(req,res){
+    res.send('<h1>yup server is running</h1>');
+});
 
 
 
