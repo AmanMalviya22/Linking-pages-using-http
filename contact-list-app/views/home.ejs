@@ -1,14 +1,19 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-
-   <%=  locals.title%>
-
-    </title>
-</head>
-<body>
-    <h1>Rendering ejs</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= locals.title %></title>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <% for(let i of contact_list){ %>
+        <li>
+          <p><%= i.name %></p>
+          <p><%= i.age %></p>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </body>
 </html>
