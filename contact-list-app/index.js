@@ -29,6 +29,12 @@ app.get("/", function (req, res) {
 app.get("/practice", function (req, res) {
   res.render("practice", { title: "my practice app" });
 });
+app.post('/create-contact',function(req,res){
+    var data=req.body;
+    console.log(data.name);
+    console.log(data.phone);
+    return res.redirect('/practice');
+})
 
 app.listen(port, function (err) {
   if (err) {
