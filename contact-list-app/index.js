@@ -8,9 +8,16 @@ const app=express();
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 
+
+
+//created controller for home route or entry point
 app.get('/',function(req,res){
     
     res.render('home',{title:"my express app"});
+});
+
+app.get('/practice',function(req,res){
+    res.render('practice',{ title:'my practice app'});
 });
 
 
