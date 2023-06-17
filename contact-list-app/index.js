@@ -10,7 +10,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 //adding the middleware, you can access the parsed form data in the req.body object within your route handlers
 app.use(express.urlencoded({ extended: true }));
-
+// middle ware to accessss assets folder || or static files
+app.use(express.static('assets'));
 // created our own middleware1
 app.use(function(req,res,next){
 console.log("middleware 1 is called");
