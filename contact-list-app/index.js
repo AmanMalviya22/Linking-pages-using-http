@@ -1,7 +1,9 @@
 const express = require("express");
 const path = require("path");
 const port = 8000;
+// require mongoose || it connect main server to the database
 const db=require('./config/mongoose');
+// require contact schema 
 const Contact=require('./models/contact');
 //app has all functionality of express
 const app = express();
@@ -57,11 +59,18 @@ app.get("/practice", function (req, res) {
 
 //controller for create-contact route
 app.post("/create-contact", function (req, res) {
-  contactList.push({
-    name: req.body.name,
-    phone: req.body.phone, // Add the phone property
-  });
-  res.redirect("back");
+  
+  Contact.create({
+    name:req.body.name,
+    phone:req.body.phone
+  },function(error,newContact){
+    if(erro){
+      console.log('error during creating contact');
+      return ;
+    }
+    return res.redirect('back');
+  })
+  
 });
 
 app.get('/delete-contact/',function(req,res){
