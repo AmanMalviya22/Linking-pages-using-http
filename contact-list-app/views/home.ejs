@@ -1,27 +1,65 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="css/home.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/home.css" />
   </head>
   <body>
-    <div>
-      <ul>
-        <% for (let contact of contact_list) { %>
-        <li>
-          <p>Name: <%= contact.name %></p>
-          <p>Age: <%= contact.age %></p> <!-- Access the phone property -->
-        </li>
-        <% } %>
-      </ul>
+    <h1 id="page-heading">
+      <span class="fas fa-address-book"></span>
+      My Contacts List
+    </h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <ul class="contact-list">
+            <% for (let contact of contact_list) { %>
+            <li>
+              <div class="contact-details">
+                <p><strong>Name:</strong> <%= contact.name %></p>
+                <p><strong>Age:</strong> <%= contact.age %></p>
+              </div>
+              <div id="delete-contact">
+                <a href="/delete-contact/<%=contact.name%>"
+                  ><i class="fas fa-window-close"></i
+                ></a>
+              </div>
+            </li>
+            <% } %>
+          </ul>
+          <form action="/create-contact" method="post">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                placeholder="Name"
+                required
+              />
+              <input
+                type="text"
+                class="form-control"
+                name="age"
+                placeholder="Age"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
-    <form action="/create-contact" method="post">
-      <input type="text" name="name" placeholder="Name" required>
-      <input type="text" name="age" placeholder="age" required>
-      
-      <button type="submit">Submit</button>
-    </form>
     <script src="js/home.js"></script>
   </body>
 </html>
