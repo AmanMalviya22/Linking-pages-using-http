@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const port = 8000;
-
+const db=require('./config/mongoose');
 //app has all functionality of express
 const app = express();
 //setup out view engine as ejs
@@ -64,8 +64,12 @@ app.post("/create-contact", function (req, res) {
 });
 
 app.get('/delete-contact/',function(req,res){
-
-  console.log(req.query);
+  let name=req.query.name;
+  let index=contactList.findIndex(contact=>contact.name==name);
+  if(index!=-1){
+    contactList.splice(index,1);
+  }
+  res.redirect('back');
 })
 
 app.listen(port, function (err) {
