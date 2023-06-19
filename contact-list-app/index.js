@@ -63,9 +63,9 @@ app.post("/create-contact", function (req, res) {
   res.redirect("back");
 });
 
-app.get('/delete-contact/:name',function(req,res){
+app.get('/delete-contact/',function(req,res){
 
-  console.log(req.params);
+  console.log(req.query);
 })
 
 app.listen(port, function (err) {
