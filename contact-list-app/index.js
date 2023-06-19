@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const port = 8000;
 const db=require('./config/mongoose');
+const Contact=require('./models/contact');
 //app has all functionality of express
 const app = express();
 //setup out view engine as ejs
@@ -31,15 +32,15 @@ app.use(function (req, res, next) {
 let contactList = [
   {
     name: "aman",
-    age: 20,
+    phone: 482929428428,
   },
   {
     name: "rohit",
-    age: 25,
+    phone: 242224225,
   },
   {
     name: "monika",
-    age: 23,
+    phone: 242924294223,
   },
 ];
 
@@ -58,7 +59,7 @@ app.get("/practice", function (req, res) {
 app.post("/create-contact", function (req, res) {
   contactList.push({
     name: req.body.name,
-    age: req.body.age, // Add the phone property
+    phone: req.body.phone, // Add the phone property
   });
   res.redirect("back");
 });

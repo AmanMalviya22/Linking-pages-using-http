@@ -28,10 +28,10 @@
             <li>
               <div class="contact-details">
                 <p><strong>Name:</strong> <%= contact.name %></p>
-                <p><strong>Age:</strong> <%= contact.age %></p>
+                <p><strong>phone:</strong> <%= contact.phone %></p>
               </div>
               <div id="delete-contact">
-                <a href="/delete-contact/?name=<%=contact.name%>&age=<%=contact.age%>"
+                <a href="/delete-contact/?name=<%=contact.name%>&age=<%=contact.phone%>"
                   ><i class="fas fa-window-close"></i
                 ></a>
               </div>
@@ -50,8 +50,8 @@
               <input
                 type="text"
                 class="form-control"
-                name="age"
-                placeholder="Age"
+                name="phone"
+                placeholder="Phone"
                 required
               />
             </div>
