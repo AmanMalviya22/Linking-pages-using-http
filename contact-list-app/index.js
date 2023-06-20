@@ -31,8 +31,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-
-
 //created controller for home route or entry point
 app.get("/", async function (req, res) {
   console.log("my name from home route", req.myname);
@@ -40,13 +38,15 @@ app.get("/", async function (req, res) {
     //finding contacts collection from databasee
     const contacts = await Contact.find({});
     //passsing contacts to home.js
-    return res.render("home", { title: "my express app", contact_list: contacts });
+    return res.render("home", {
+      title: "my express app",
+      contact_list: contacts,
+    });
   } catch (error) {
     console.log("error during fetching the data from the database", error);
     return res.status(500).send("Internal Server Error");
   }
 });
-
 
 //controller for practice route
 app.get("/practice", function (req, res) {
@@ -70,13 +70,20 @@ app.post("/create-contact", async function (req, res) {
   }
 });
 
-app.get("/delete-contact/", function (req, res) {
-  let name = req.query.name;
-  let index = contactList.findIndex((contact) => contact.name == name);
-  if (index != -1) {
-    contactList.splice(index, 1);
+
+//controller for deleting the contact for database
+app.get("/delete-contact/", async function (req, res) {
+  let id = req.query.id;
+  try {
+    const deletedDocument = await Contact.findByIdAndDelete(id);
+    // Handle the deleted document or perform any other necessary actions
+    console.log("deleted successfully");
+    res.redirect('back');
+  } catch (error) {
+    // Handle the error
+    console.log("error in deleting the contact", error);
+    return;
   }
-  res.redirect("back");
 });
 
 app.listen(port, function (err) {
