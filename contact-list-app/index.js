@@ -2,9 +2,9 @@ const express = require("express");
 const path = require("path");
 const port = 8000;
 // require mongoose || it connect main server to the database
-const db=require('./config/mongoose');
-// require contact schema 
-const Contact=require('./models/contact');
+const db = require("./config/mongoose");
+// require contact schema
+const Contact = require("./models/contact");
 //app has all functionality of express
 const app = express();
 //setup out view engine as ejs
@@ -31,26 +31,22 @@ app.use(function (req, res, next) {
   next();
 });
 
-let contactList = [
-  {
-    name: "aman",
-    phone: 482929428428,
-  },
-  {
-    name: "rohit",
-    phone: 242224225,
-  },
-  {
-    name: "monika",
-    phone: 242924294223,
-  },
-];
+
 
 //created controller for home route or entry point
-app.get("/", function (req, res) {
-  console.log("my name frome home route", req.myname);
-  res.render("home", { title: "my express app", contact_list: contactList });
+app.get("/", async function (req, res) {
+  console.log("my name from home route", req.myname);
+  try {
+    //finding contacts collection from databasee
+    const contacts = await Contact.find({});
+    //passsing contacts to home.js
+    return res.render("home", { title: "my express app", contact_list: contacts });
+  } catch (error) {
+    console.log("error during fetching the data from the database", error);
+    return res.status(500).send("Internal Server Error");
+  }
 });
+
 
 //controller for practice route
 app.get("/practice", function (req, res) {
@@ -58,29 +54,30 @@ app.get("/practice", function (req, res) {
 });
 
 //controller for create-contact route
-app.post("/create-contact", function (req, res) {
-  
-  Contact.create({
-    name:req.body.name,
-    phone:req.body.phone
-  },function(error,newContact){
-    if(erro){
-      console.log('error during creating contact');
-      return ;
-    }
-    return res.redirect('back');
-  })
-  
+
+app.post("/create-contact", async function (req, res) {
+  try {
+    //create new contact and add it to database name
+    const newContact = await Contact.create({
+      name: req.body.name,
+      phone: req.body.phone,
+    });
+    console.log("New contact created:", newContact);
+    return res.redirect("back");
+  } catch (error) {
+    console.error("Error during creating contact:", error);
+    return res.redirect("back");
+  }
 });
 
-app.get('/delete-contact/',function(req,res){
-  let name=req.query.name;
-  let index=contactList.findIndex(contact=>contact.name==name);
-  if(index!=-1){
-    contactList.splice(index,1);
+app.get("/delete-contact/", function (req, res) {
+  let name = req.query.name;
+  let index = contactList.findIndex((contact) => contact.name == name);
+  if (index != -1) {
+    contactList.splice(index, 1);
   }
-  res.redirect('back');
-})
+  res.redirect("back");
+});
 
 app.listen(port, function (err) {
   if (err) {
