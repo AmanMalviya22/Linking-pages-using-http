@@ -1,0 +1,72 @@
+/* home.css */
+
+/* Reset default margin and padding */
+body, ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Styling for the page heading */
+  #page-heading {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #page-heading .fas {
+    margin-right: 10px;
+  }
+  
+  /* Styling for the contact box */
+  .contact-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+  }
+  
+  .contact-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Horizontally center items */
+  }
+  
+  .contact-list li {
+    margin-bottom: 10px;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center; /* Center align text within each list item */
+    width: 250px; /* Set a fixed width for each list item */
+  }
+  .contact-details p {
+    margin: 5px 0;
+  }
+  .contact-box:hover{
+    background-color: gray;
+  }
+  
+  /* Styling for the form */
+  form {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .form-control {
+    width: 250px;
+    margin-bottom: 10px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+  }
+  
